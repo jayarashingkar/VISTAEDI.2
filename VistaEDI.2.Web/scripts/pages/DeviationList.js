@@ -28,7 +28,7 @@ var columns = [
 
     },
     {
-        label: 'Reject on Deviation',
+        label: 'Reject',
         property: 'Reject',
         width: '50px',
     }

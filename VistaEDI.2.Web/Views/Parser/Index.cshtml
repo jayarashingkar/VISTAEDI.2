@@ -45,7 +45,7 @@
                         </div>
 
                         <div style="color:red">
-                            <label for="" class="cols-sm-2 control-label">@Html.Raw(ViewBag.Message)</label>
+                            <label for="" name="lblMessage" id="lblMessage" class="cols-sm-2 control-label">@Html.Raw(ViewBag.Message)</label>
                         </div>
                         <div>
                         <div style="color:blue">
@@ -92,10 +92,11 @@
      //   $('#status').attr('data-live-search', 'true');
     //    $('#status').selectpicker();
 
-        $("#Choose").click(function () {         
+        $("#Choose").click(function () {
+            $('#lblMessage').text('');
             $("#file").click();
             $("#filePathChoose").val($("#file").val());
-
+         
         });
 
         $("#Reset").click(function () {

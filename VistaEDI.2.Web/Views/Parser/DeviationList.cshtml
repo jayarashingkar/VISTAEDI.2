@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "DeviationList";
+}
+<div class="panel-heading">List of Deviated Records</div>
+<div class="panel-body">
+
+    <div id="searchDiv" class="container">        
+       @* <form action="ExportToExcel" method="post">*@
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="searchHeatNo" class="cols-sm-2 control-label">Heat Number</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                <input type="text" value="" id="searchHeatNo" name="searchHeatNo" class="form-control" placeholder="Enter Heat Number" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-md-3">
+                    <div class="form-group">
+                        <label for="searchStatus" class="cols-sm-2 control-label">Status</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                <input type="text" value="" id="searchStatus" name="searchStatus" class="form-control" placeholder="Enter Status" />
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="" class="cols-sm-2 control-label"></label>
+                        <div class="cols-sm-10">
+                            <button id="btnSearch" class="btn btn-primary btn-large" onclick="return false;"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button id="btnClear" class="btn btn-primary btn-large" onclick="return false;"><i class="fa fa-times" aria-hidden="true"></i> Clear</button>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">               
+                <div style="color:red">
+                    <label id="lblmessage" name="lblmessage">  </label>
+                </div>
+            </div>
+    </div>
+    @{Html.RenderPartial("_Repeater", "DeviationRepeater");}
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/DeviationList")
+    <script>
+        $(document).ready(function () {
+            LoadGrid("DeviationRepeater");
+        });
+    </script>
+}

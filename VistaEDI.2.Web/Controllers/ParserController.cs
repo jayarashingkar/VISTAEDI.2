@@ -82,23 +82,12 @@ namespace VistaEDI._2.Web.Controllers
                 //status = '3' : Accept on Deviation
                 //status = '0' : Reject on Deviation
                 result = new VistaParser().AcceptOrReject(status, RecId);
-
-
-                //if (result.Success)
-                //{
-                //   // ViewBag.StatusMessage = result.Message;
-                //}
-                //else
-                //{
-                //    ViewBag.StatusMessage = "Error";
-                //}               
             }           
            catch(Exception ex)
             {
                 result.Message = ex.Message;
             }
          
-           // return RedirectToAction("DeviationList");
               return Json(new { isSuccess = result.Success, message = result.Message }, JsonRequestBehavior.AllowGet);
         }
         

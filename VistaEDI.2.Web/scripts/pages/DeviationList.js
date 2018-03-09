@@ -227,8 +227,9 @@ $('#btnSearch').on('click', function () {
 });
 
 $('#btnClear').on('click', function () {
-    //check if this should be dopbox - currently keep text for search
+    //check if this should be drop down menu - currently keep text for search
     $('#searchHeatNo').val('');
+
     $('#searchStatus').val(''); 
     $('#DeviationRepeater').repeater('render');
     return false;

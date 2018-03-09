@@ -67,7 +67,7 @@ namespace VistaEDI._2.Data
                     j = 0;
                     //return message
                     res.Message = row[j].ToString();j++;
-                    //heat number
+                    //return heat number
                     res.Message1 = row[j].ToString();
                     res.Success = true;
                 }
@@ -155,6 +155,9 @@ namespace VistaEDI._2.Data
                     deviation.HeatNumber = row[j].ToString(); j++;
                     deviation.Deviations = row[j].ToString(); j++;
                     deviation.Status = Convert.ToChar(row[j]);
+
+                    // if the list of records need to displayed
+
                     //  deviation.UACCode = row[j].ToString(); j++;
                     //  deviation.Type = Convert.ToChar(row[j]); j++; ;
                     //  if (row[j] != null)                    
@@ -196,10 +199,7 @@ namespace VistaEDI._2.Data
             }
             catch (Exception ex)
             {
-               // lstDeviation = null;
-                //DeviationList deviation = new DeviationList();
-                //deviation.Status = 'F';
-                //lstDeviation.Add(deviation);
+               
             }
             return lstDeviation;
         }

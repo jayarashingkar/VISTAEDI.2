@@ -19,8 +19,6 @@ namespace VistaEDI._2.BL
             resSend.Success = true;
             try
             {
-                //  string errorList = "";
-
                 ResultViewModel resReceive;              
 
                 var result = JsonConvert.DeserializeObject<List<ChemistryInfo>>(data);
@@ -58,18 +56,7 @@ namespace VistaEDI._2.BL
             try
             {
                 resSend =  new ParserData().AcceptOrReject(status, RecId);
-                //if (resSend.Success)
-                //{
-
-                //    if (status == '3')
-                //    {
-                //        resSend.Message = "Record Inserted on Deviation";
-                //    }
-                //    if (status == '0')
-                //    {
-                //        resSend.Message = "Record is not Inserted";
-                //    }
-                //}
+               
             }
             catch(Exception ex)
             {

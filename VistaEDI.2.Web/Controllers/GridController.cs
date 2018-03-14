@@ -23,15 +23,17 @@ namespace VistaEDI._2.Web.Controllers
             try
             {
                 lstDeviation = new ParserData().GetList(option);
-                total = lstDeviation.Count();          
+                total = lstDeviation.Count();
+                return Json(new { items = lstDeviation, total = total }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 lstDeviation = null;
                 total = 0;
+                throw ex;
             }
 
-              return Json(new { items = lstDeviation, total = total }, JsonRequestBehavior.AllowGet);
+           
         }
     }
 }

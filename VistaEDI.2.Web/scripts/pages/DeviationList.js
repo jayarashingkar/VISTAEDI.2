@@ -102,7 +102,8 @@ function customDataSource(options, callback) {
 
     $.ajax({
         type: 'post',
-        url: GetRootDirectory() + '/Grid/GetDeviationList',
+        //   url: GetRootDirectory() + '/Grid/GetDeviationList',
+        url: '../Grid/GetDeviationList',
         data: options
     })
        

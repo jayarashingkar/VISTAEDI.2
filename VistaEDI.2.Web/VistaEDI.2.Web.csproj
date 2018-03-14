@@ -165,6 +165,9 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\heading.PNG" />
+    <Content Include="Images\uaclogo.jpg" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\bootbox.min.js" />
@@ -181,6 +184,7 @@
     <Content Include="scripts\bootstrapValidator.min.js" />
     <Content Include="scripts\fuelux.min.js" />
     <Content Include="scripts\GridUtil.js" />
+    <None Include="Properties\PublishProfiles\VistaEDI.2.0.pubxml" />
     <None Include="scripts\jquery.validate-vsdoc.js" />
     <Content Include="scripts\jquery-3.1.1.js" />
     <Content Include="scripts\jquery-ui.min.js" />
@@ -196,7 +200,6 @@
     <Content Include="Web.config" />
     <Content Include="Views\Parser\DeviationList.cshtml" />
     <Content Include="Views\Shared\_Repeater.cshtml" />
-    <Content Include="Views\Parser\IndexBackUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />

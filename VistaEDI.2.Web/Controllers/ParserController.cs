@@ -59,9 +59,15 @@ namespace VistaEDI._2.Web.Controllers
                 }
             }
             else
+            {
                 ViewBag.Message = "Upload Rejected";
+            }
+                
             if (isDeviation)
+            {
                 return RedirectToAction("DeviationList");
+            }
+                            
             return View("Index");
         }
 

@@ -120,6 +120,44 @@ namespace VistaEDI._2.Data
                 return res;
             }
         }
+        
+        public ResultViewModel DeleteRecords(string selectedRecords)
+        {
+            ResultViewModel res = new ResultViewModel();
+            res.Message = "";
+            res.Message1 = "";
+            res.Success = false;
+
+            try
+            {
+                //Store Procedure 
+                // Deletes the record with sent selectedRecords from the Deviation table.
+
+                StoredProcedureName = "VistaEDIDeleteDeviaitonRecords";
+                this.ConnectionString = ConfigurationManager.AppSettings["DBConnection"].ToString();
+
+                SQLParameters = new Dictionary<string, object>();
+                if (string.IsNullOrWhiteSpace(selectedRecords))
+                    selectedRecords = "none";
+
+                SQLParameters["DeviationRecIds"] = selectedRecords;
+
+                DataTable result = Execute();
+
+                res.Message = result.Rows[0][0].ToString();
+                if (res.Message != "")
+                    res.Success = true;
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.Message = "FAIL";
+                res.Message1 = ex.ToString();
+                //   res.Success = false;
+                return res;
+            }
+        }
 
         // public DataSearch<DeviationList> GetList(DataGridoption option)
         // use DataSearch is multiple lists are needed
@@ -232,5 +270,8 @@ namespace VistaEDI._2.Data
                 }
             }
         }
+
+ 
+
     }
 }

@@ -1,11 +1,17 @@
 ﻿// define the columns in your datasource
 var columns = [
-     {
-         label: 'Record Id',
-         property: 'RecId',
-         sortable: true,
-         width: '50px'
-     },
+     //{
+     //    label: 'Record Id',
+     //    property: 'RecId',
+     //    sortable: true,
+     //    width: '50px'
+     //},
+       {
+           label: 'Select',
+           property: 'RecId',
+           sortable: true,
+           width: '50px'
+       },
     {
         label: 'Heat Number',
         property: 'HeatNumber',
@@ -47,7 +53,9 @@ function customColumnRenderer(helpers, callback) {
     switch (column) {
         case 'RecId':
             // let's combine name and description into a single column
-            customMarkup = '<div style="font-size:12px;">' + rowData.RecId + '</div>';
+           // customMarkup = '<div style="font-size:12px;">' + rowData.RecId + '</div>';
+            customMarkup = ' <input type="checkbox" name="DeviationRecID" id="DeviationRecID' + rowData.RecId + '" class="DeviationRecID" value="' + rowData.RecId + '"/>';
+
             break;       
         case 'Accept':
             // let's combine name and description into a single column
@@ -76,11 +84,13 @@ function customRowRenderer(helpers, callback) {
     callback();
 }
 
+var selectedRecords = "";
 // this example uses an API to fetch its datasource.
 // the API handles filtering, sorting, searching, etc.
 function customDataSource(options, callback) {
     // set options   
-    
+    selectedRecords = "none";
+
     var pageIndex = options.pageIndex;
     var pageSize = options.pageSize;
     var search = '';
@@ -133,12 +143,43 @@ function customDataSource(options, callback) {
 
                // invoke callback to render repeater
                callback(dataSource);
+            
+               $("input[class='DeviationRecID']").on('click', function () {
+
+                   var recID = $(this).val();
+
+                   if ($(this).prop('checked')) {
+                       if (selectedRecords == "none")
+                           //selectedRecords += recID;
+                           selectedRecords = recID;
+                       else
+                           selectedRecords += "," + recID;
+                   }
+                   else {
+                       var removeString = selectedRecords.replace(recID, "");
+                       selectedRecords = removeString;
+                   }
+                   var removecomma = selectedRecords.replace(",,", ",");
+                   selectedRecords = removecomma;
+               });
            }
            else {
                alert("no data ");
            }
-       });
+        });
+
 }
+
+
+// on button click funtions
+$('#btnDeleteAll').on('click', function () {
+    // DeleteRecords(selectedRecords);
+    DeleteRecords();
+});
+$('#btnSelectDelete').on('click', function () {  
+    // DeleteRecords(selectedRecords);
+    DeleteRecords();
+});
 
 function GridAcceptClicked(id) {
     bootbox.confirm({
@@ -218,6 +259,49 @@ function GridRejectClicked(id) {
             }
             else
                 $('#lblmessage').text('Record is not inserted');
+        }
+    });
+}
+
+//function DeleteRecords(selectedRecords) {
+function DeleteRecords() {   
+    bootbox.confirm({
+        message: VistaEDI.Constants.AreYouDelete,
+        buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                //status= '0' is rejected deviation
+                var options = {
+                    selectedRecords: selectedRecords,
+                };
+              
+                $.ajax({
+                    type: 'post',
+                    url: GetRootDirectory() + '/Parser/DeleteRecords',
+                    data: options
+                })
+              .done(function (data) {
+                 
+                  if (data.isSuccess) {
+                      $('#lblmessage').text(data.message + ': ' +selectedRecords);
+                  }
+                  else {
+                      $('#lblmessage').text(data.message + ': ' +selectedRecords);
+                  }
+                  $('#DeviationRepeater').repeater('render');
+              });
+            }
+            else
+                $('#lblmessage').text('Record not Deleted');
         }
     });
 }

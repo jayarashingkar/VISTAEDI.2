@@ -96,7 +96,39 @@ namespace VistaEDI._2.Web.Controllers
          
               return Json(new { isSuccess = result.Success, message = result.Message }, JsonRequestBehavior.AllowGet);
         }
-        
+
+        public ActionResult DeleteRecords(string selectedRecords)
+        {
+            ResultViewModel result = new ResultViewModel();
+            //  bool isSuccess = false;
+
+            try
+            {
+                    result = new VistaParser().DeleteRecords(selectedRecords);
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+
+            return Json(new { isSuccess = result.Success, message = result.Message , message1 = result.Message1}, JsonRequestBehavior.AllowGet);
+        }
+
+   
+        //private static int splitRec(string records, int count)
+        //{
+        //    int record = 0;
+        //    if (!string.IsNullOrEmpty(records))
+        //    {
+        //        // string[] recordsSplit = records.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+        //        string[] recordsSplit = records.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        //        record = Convert.ToInt32(recordsSplit[count]);
+        //    }
+        //    return record;
+        //}
+
         #endregion
     }
+
+
 }

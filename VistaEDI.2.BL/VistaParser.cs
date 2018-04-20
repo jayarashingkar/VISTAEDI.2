@@ -67,5 +67,24 @@ namespace VistaEDI._2.BL
         
         }
 
+        public ResultViewModel DeleteRecords(string selectedRecords)
+        {
+          ResultViewModel resSend = new ResultViewModel();
+            resSend.Message = "";
+            resSend.Success = true;
+            try
+            {
+                resSend = new ParserData().DeleteRecords(selectedRecords);
+
+            }
+            catch (Exception ex)
+            {
+                resSend.Message1 = ex.ToString();
+                resSend.Message = "Error in Deletion";
+            }
+            return resSend;
+
+        }
+  
     }
 }

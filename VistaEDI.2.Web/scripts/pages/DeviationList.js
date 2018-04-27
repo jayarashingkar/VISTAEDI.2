@@ -291,7 +291,7 @@ function DeleteRecords() {
                 })
               .done(function (data) {
                  
-                  if (data.isSuccess) {
+                  if (data.isSuccess) { 
                       $('#lblmessage').text(data.message + ': ' +selectedRecords);
                   }
                   else {
